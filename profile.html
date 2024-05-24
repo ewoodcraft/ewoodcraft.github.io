@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="apple-touch-icon" href="logo.png">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+        <title>BudgetBites</title>
+    </head>
+    <body>
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.5/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+
+        <div class="container-fluid p-0 custom-bg text-white text-center">
+            <div class="logo">
+                <img src="logo.png" alt="logo" width="100" height="100">
+            </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center my-5">
+            <div class="icon-container">
+                <i class="fas fa-user-circle icon icon-style"></i>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <h1>Saved Recipes</h1>
+            <div id="recipe-list" class="mt-3 px-3"></div>
+        </div>
+
+
+
+
+        <nav class="navbar navbar-expand navbar-light custom-bg justify-content-center fixed-bottom">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item px-5">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item px-5">
+                        <a class="nav-link" href="new-recipe.html">
+                            <i class="fas fa-plus-square"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item px-5">
+                        <a class="nav-link" href="profile.html">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const recipeList = document.getElementById('recipe-list');
+
+                // Retrieve saved recipe data from localStorage
+                const savedRecipeData = JSON.parse(localStorage.getItem('recipeData'));
+
+                // Function to generate HTML for a single recipe
+                function createRecipeHTML(recipe) {
+                    const ingredientsHTML = recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
+                    return `
+<div class="card mb-3">
+<div class="card-body">
+<h5 class="card-title">${recipe.name}</h5>
+<ul class="list-group list-group-flush px-3">${ingredientsHTML}</ul>
+            </div>
+            </div>
+`;
+                }
+
+                // Function to render saved recipes
+                function renderRecipes() {
+                    if (savedRecipeData) {
+                        const recipeHTML = createRecipeHTML(savedRecipeData);
+                        recipeList.innerHTML = recipeHTML;
+                    } else {
+                        recipeList.innerHTML = '<p>No recipes found.</p>';
+                    }
+                }
+
+                // Initial render
+                renderRecipes();
+            });
+
+        </script>
+
+
+    </body>
+</html>
